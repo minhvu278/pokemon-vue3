@@ -1,26 +1,28 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <main-screen v-if="statusMatch === 'default'" @onStart="onHandleBeforeStart($event)" />
+  <interact-screen v-if="statusMatch === 'match'" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MainScreen from "@/components/MainScreen";
+import InteractScreen from "@/components/InteractScreen";
 
 export default {
   name: 'App',
+  data() {
+    return {
+      statusMatch: "default"
+    }
+  },
   components: {
-    HelloWorld
-  }
+    MainScreen,
+    InteractScreen
+  },
+  methods: {
+    onHandleBeforeStart(config) {
+      console.log("Ok", config)
+      this.statusMatch = "match"
+    }
+  },
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
