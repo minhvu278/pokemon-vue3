@@ -1,7 +1,7 @@
 <template>
   <div class="screen">
     <h1>Interact here ...</h1>
-    <card-flip />
+    <card-flip v-for="(card, index) in cardsContext" :key="index" :imgBackFaceUrl="`images/${card}.png`" />
   </div>
 </template>
 
@@ -12,6 +12,14 @@ export default {
   name: "InteractScreen",
   components: {
     CardFlip
+  },
+  props: {
+    cardsContext: {
+      type: Array,
+      default: function () {
+        return [];
+      }
+    }
   }
 }
 </script>

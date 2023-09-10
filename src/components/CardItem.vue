@@ -2,10 +2,10 @@
   <div class="card">
     <div class="card__inner" :class="{ 'is-flipped': isFlipped }" @click="onToggleFlipCard">
       <div class="card__face card__face--front">
-        <div class="card__content">Front</div>
+        <div class="card__content"></div>
       </div>
       <div class="card__face card__face--back">
-        <div class="card__content">Back</div>
+        <div class="card__content" :style="{ backgroundImage: `url(${require('@/assets/' + imgBackFaceUrl)})` }"></div>
       </div>
     </div>
   </div>
@@ -13,6 +13,12 @@
 
 <script>
 export default {
+  props: {
+    imgBackFaceUrl: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       isFlipped: false,
@@ -58,8 +64,23 @@ export default {
     box-shadow: 0 3px 10px 3px rgba(0, 0, 0, 0.2);
   }
 
+  .card__face--front .card__content {
+    background: url("../assets/images/icon_back.png") no-repeat center center;
+    background-size: 40px 40px;
+    width: 100%;
+    height: 100%;
+  }
+
   .card__face--back {
     background-color: var(--light);
     transform: rotateY(-180deg);
+  }
+
+  .card__face--back .card__content {
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
   }
 </style>
